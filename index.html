@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spooky Roblox Date Night Invite 👻💖</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        pastel: {
+                            purple: '#2D1B4E',
+                            darkBg: '#120720',
+                            cardBg: '#21113B',
+                            pink: '#FFB7C5',
+                            hotPink: '#FF4081',
+                            lavender: '#E8D5FF',
+                            orange: '#FF9E00',
+                            glowOrange: '#FF6B00',
+                            mint: '#72F2C5',
+                        }
+                    },
+                    fontFamily: {
+                        fredoka: ['Fredoka', 'sans-serif'],
+                        comfortaa: ['Comfortaa', 'cursive'],
+                        quicksand: ['Quicksand', 'sans-serif'],
+                    },
+                    animation: {
+                        'float-ghost': 'floatGhost 3.5s ease-in-out infinite',
+                        'float-heart': 'floatHeart 4s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s infinite alternate',
+                        'wiggle': 'wiggle 0.6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        floatGhost: {
+                            '0%, 100%': { transform: 'translateY(0px) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-18px) rotate(5deg)' },
+                        },
+                        floatHeart: {
+                            '0%, 100%': { transform: 'translateY(0px) scale(1)' },
+                            '50%': { transform: 'translateY(-10px) scale(1.08)' },
+                        },
+                        pulseGlow: {
+                            '0%': { boxShadow: '0 0 15px rgba(255, 183, 197, 0.4)' },
+                            '100%': { boxShadow: '0 0 35px rgba(255, 158, 0, 0.8), 0 0 15px rgba(255, 64, 129, 0.6)' },
+                        },
+                        wiggle: {
+                            '0%, 100%': { transform: 'rotate(-4deg)' },
+                            '50%': { transform: 'rotate(4deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&family=Fredoka:wght@400;500;600;700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Canvas Confetti & Lucide Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Fredoka', 'Quicksand', sans-serif;
+            background-color: #120720;
+            color: #E8D5FF;
+            overflow-x: hidden;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #120720;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #FFB7C5;
+            border-radius: 6px;
+        }
+
+        /* Glassmorphism Cards */
+        .glass-card {
+            background: rgba(33, 17, 59, 0.75);
+            backdrop-filter: blur(14px);
+            border: 2px solid rgba(255, 183, 197, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .glass-card-hover:hover {
+            border-color: rgba(255, 183, 197, 0.6);
+            transform: translateY(-6px) scale(1.01);
+            box-shadow: 0 12px 30px rgba(255, 64, 129, 0.25);
+        }
+
+        /* Title Glow */
+        .glow-title {
+            text-shadow: 0 0 16px rgba(255, 183, 197, 0.7), 0 0 30px rgba(255, 158, 0, 0.5);
+        }
+
+        .glow-orange-text {
+            text-shadow: 0 0 10px rgba(255, 158, 0, 0.8);
+        }
+
+        /* Checkbox Custom Tick */
+        .checkbox-custom:checked + label .check-icon {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Ticket Stitch Border */
+        .ticket-border {
+            background-image: repeating-linear-gradient(0deg, #FFB7C5, #FFB7C5 8px, transparent 8px, transparent 16px);
+        }
+    </style>
+</head>
+<body class="relative min-h-screen pb-16">
+
+    <!-- Starry & Spooky Background Canvas -->
+    <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="fixed top-5 right-5 z-50 transform translate-x-full transition-all duration-300 glass-card px-5 py-3 rounded-2xl flex items-center gap-3 border-l-4 border-pastel-hotPink shadow-2xl">
+        <span id="toast-icon" class="text-2xl">✨</span>
+        <span id="toast-message" class="font-medium text-white text-sm">Notification!</span>
+    </div>
+
+    <!-- Main Outer Wrapper -->
+    <div class="max-w-4xl mx-auto px-4 pt-6 relative z-10">
+
+        <!-- Header / Audio Controller Bar -->
+        <header class="flex justify-between items-center mb-8">
+            <div class="flex items-center gap-2 glass-card px-4 py-2 rounded-full text-xs md:text-sm font-semibold text-pastel-lavender shadow-md">
+                <span class="animate-pulse">🎃</span> SPOOKY CO-OP DATE INVITATION
+            </div>
+            
+            <div class="flex items-center gap-3">
+                <button id="audio-toggle" onclick="toggleAudio()" class="glass-card hover:bg-pastel-purple/80 px-4 py-2 rounded-full text-xs md:text-sm font-bold text-pastel-pink transition flex items-center gap-2 border border-pastel-pink/30 shadow-md">
+                    <span id="audio-icon">🔊</span>
+                    <span id="audio-text">Sound: ON</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- HERO INVITATION SECTION -->
+        <section class="glass-card rounded-3xl p-6 md:p-12 text-center mb-10 shadow-2xl relative overflow-hidden border-2 border-pastel-pink/40">
+            <!-- Floating Ghost Visual Graphic -->
+            <div class="relative inline-block mb-4">
+                <div class="animate-float-ghost relative z-10">
+                    <svg class="w-28 h-28 md:w-36 md:h-36 mx-auto drop-shadow-[0_0_20px_rgba(255,183,197,0.7)]" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Cute Ghost Body -->
+                        <path d="M100 20C60 20 40 50 40 90C40 140 30 160 50 170C70 180 80 160 100 170C120 160 130 180 150 170C170 160 160 140 160 90C160 50 140 20 100 20Z" fill="#FFF5F7"/>
+                        <!-- Blushing Cheeks -->
+                        <circle cx="70" cy="95" r="10" fill="#FFB7C5" opacity="0.8"/>
+                        <circle cx="130" cy="95" r="10" fill="#FFB7C5" opacity="0.8"/>
+                        <!-- Cute Happy Eyes -->
+                        <path d="M65 80 Q75 70 85 80" stroke="#2D1B4E" stroke-width="5" stroke-linecap="round" fill="none"/>
+                        <path d="M115 80 Q125 70 135 80" stroke="#2D1B4E" stroke-width="5" stroke-linecap="round" fill="none"/>
+                        <!-- Smiling Mouth -->
+                        <path d="M93 95 Q100 105 107 95" stroke="#2D1B4E" stroke-width="4" stroke-linecap="round" fill="none"/>
+                        <!-- Cute Heart Ribbon Bow on Head -->
+                        <path d="M75 35 C65 25 55 40 75 50 C95 40 85 25 75 35 Z" fill="#FF4081"/>
+                        <path d="M90 35 C100 25 110 40 90 50 C70 40 80 25 90 35 Z" fill="#FF4081"/>
+                        <circle cx="82" cy="42" r="5" fill="#FFB7C5"/>
+                        <!-- Floating Gamer Headphones -->
+                        <path d="M42 85 C42 45 158 45 158 85" stroke="#72F2C5" stroke-width="8" stroke-linecap="round" fill="none"/>
+                        <rect x="34" y="80" width="16" height="28" rx="8" fill="#FF9E00"/>
+                        <rect x="150" y="80" width="16" height="28" rx="8" fill="#FF9E00"/>
+                    </svg>
+                </div>
+                <!-- Glowing Aura behind ghost -->
+                <div class="absolute inset-0 bg-pastel-pink/20 rounded-full filter blur-2xl z-0 transform scale-125"></div>
+            </div>
+
+            <!-- Title & Subtitle -->
+            <h1 class="text-3xl md:text-5xl font-extrabold mb-4 text-white glow-title leading-tight font-fredoka">
+                Hey Beautiful... Will You Be My <span class="text-pastel-pink">Roblox Date</span>? 👻💖
+            </h1>
+            
+            <p class="text-pastel-lavender text-base md:text-lg max-w-xl mx-auto mb-8 font-medium leading-relaxed font-quicksand">
+                A cozy night of spooky Roblox games, endless snacks, hiding in closets together, and laughing in Discord VC! 🕯️☕
+            </p>
+
+            <!-- INTERACTIVE BUTTON ARENA -->
+            <div id="button-arena" class="relative min-h-[160px] flex flex-col md:flex-row items-center justify-center gap-6 p-6 rounded-2xl bg-black/30 border border-white/10 overflow-hidden">
+                
+                <!-- YES BUTTON -->
+                <button id="yes-btn" onclick="handleYesClick()" class="z-20 bg-gradient-to-r from-pastel-hotPink via-pink-500 to-pastel-orange text-white text-xl md:text-2xl font-bold px-10 py-4 rounded-full shadow-lg hover:shadow-pink-500/50 transition-all duration-300 flex items-center gap-3 animate-pulse-glow cursor-pointer">
+                    <span>YES! 👻💖</span>
+                    <i data-lucide="heart" class="fill-current w-6 h-6 animate-bounce"></i>
+                </button>
+
+                <!-- RUNAWAY NO BUTTON -->
+                <button id="no-btn" onmouseenter="dodgeNoButton()" onclick="dodgeNoButton()" class="z-20 bg-gray-800/80 hover:bg-gray-700 text-gray-300 text-base md:text-lg font-bold px-8 py-3 rounded-full transition-all duration-200 border border-gray-600/40 cursor-pointer shadow-md">
+                    <span id="no-btn-text">NO 🙈</span>
+                </button>
+            </div>
+
+            <!-- Funny Status Prompt -->
+            <p id="playful-status" class="mt-4 text-sm text-pastel-orange font-semibold h-6 transition-all duration-300 opacity-0">
+                Hehe, nice try! The "No" button is too timid~ 👻
+            </p>
+        </section>
+
+        <!-- SPOOKY ROBLOX GAME SELECTOR -->
+        <section class="mb-12">
+            <div class="text-center mb-8">
+                <span class="inline-block bg-pastel-pink/20 text-pastel-pink text-xs px-3 py-1 rounded-full font-bold uppercase tracking-widest mb-2 border border-pastel-pink/30">Custom Playlist</span>
+                <h2 class="text-3xl md:text-4xl font-extrabold text-white flex items-center justify-center gap-3 font-fredoka">
+                    <span>🎮</span> Choose Our Nightmares <span>👻</span>
+                </h2>
+                <p class="text-pastel-lavender text-sm md:text-base mt-2 max-w-md mx-auto">
+                    Select all the spooky games you want on our itinerary! (We can play them all 🥺)
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="games-grid">
+                <!-- Game 1: DOORS -->
+                <div onclick="toggleGameCard(this, 'DOORS 👁️')" class="game-card glass-card glass-card-hover rounded-2xl p-5 cursor-pointer relative flex flex-col justify-between border-2 border-transparent border-pastel-pink/40" data-selected="true">
+                    <div>
+                        <div class="relative h-36 rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-purple-950 to-indigo-950 flex items-center justify-center border border-white/10">
+                            <div class="text-center p-3">
+                                <span class="text-5xl block mb-1">🚪👁️</span>
+                                <span class="text-xs text-pastel-orange font-bold tracking-wider uppercase">Hotel Mystery</span>
+                            </div>
+                            <span class="badge-selected absolute top-2 right-2 bg-pastel-hotPink text-white text-xs px-2.5 py-1 rounded-full font-bold shadow-md flex items-center gap-1">
+                                <i data-lucide="check" class="w-3 h-3"></i> Selected
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1 flex items-center justify-between">
+                            DOORS 👁️
+                            <span class="text-xs text-pastel-pink font-semibold">Popular!</span>
+                        </h3>
+                        <p class="text-pastel-lavender/80 text-xs md:text-sm mb-3 font-quicksand">
+                            Surviving 100 hotel rooms, hiding in closets together, and screaming when Rush attacks!
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-pastel-pink bg-black/40 p-2.5 rounded-xl border border-white/5">
+                        <span>Spook Level: 🎃🎃🎃</span>
+                        <span class="text-pastel-mint font-semibold">Co-op Favorite 👥</span>
+                    </div>
+                </div>
+
+                <!-- Game 2: The Mimic -->
+                <div onclick="toggleGameCard(this, 'The Mimic 👺')" class="game-card glass-card glass-card-hover rounded-2xl p-5 cursor-pointer relative flex flex-col justify-between border-2 border-transparent" data-selected="false">
+                    <div>
+                        <div class="relative h-36 rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-red-950 to-purple-950 flex items-center justify-center border border-white/10">
+                            <div class="text-center p-3">
+                                <span class="text-5xl block mb-1">⛩️👺</span>
+                                <span class="text-xs text-red-400 font-bold tracking-wider uppercase">Japanese Horror</span>
+                            </div>
+                            <span class="badge-selected absolute top-2 right-2 bg-pastel-hotPink text-white text-xs px-2.5 py-1 rounded-full font-bold shadow-md hidden flex items-center gap-1">
+                                <i data-lucide="check" class="w-3 h-3"></i> Selected
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1 flex items-center justify-between">
+                            The Mimic 👺
+                        </h3>
+                        <p class="text-pastel-lavender/80 text-xs md:text-sm mb-3 font-quicksand">
+                            Creepy Japanese urban legends. I promise to lead the way and protect you in the mazes!
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-pastel-pink bg-black/40 p-2.5 rounded-xl border border-white/5">
+                        <span>Spook Level: 🎃🎃🎃🎃🎃</span>
+                        <span class="text-red-400 font-semibold">Very Scary 👻</span>
+                    </div>
+                </div>
+
+                <!-- Game 3: Evade -->
+                <div onclick="toggleGameCard(this, 'Evade 🏃')" class="game-card glass-card glass-card-hover rounded-2xl p-5 cursor-pointer relative flex flex-col justify-between border-2 border-transparent border-pastel-pink/40" data-selected="true">
+                    <div>
+                        <div class="relative h-36 rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-blue-950 to-purple-950 flex items-center justify-center border border-white/10">
+                            <div class="text-center p-3">
+                                <span class="text-5xl block mb-1">🏃‍♂️💥</span>
+                                <span class="text-xs text-yellow-300 font-bold tracking-wider uppercase">Chaos & Sprinting</span>
+                            </div>
+                            <span class="badge-selected absolute top-2 right-2 bg-pastel-hotPink text-white text-xs px-2.5 py-1 rounded-full font-bold shadow-md flex items-center gap-1">
+                                <i data-lucide="check" class="w-3 h-3"></i> Selected
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1 flex items-center justify-between">
+                            Evade 🏃
+                        </h3>
+                        <p class="text-pastel-lavender/80 text-xs md:text-sm mb-3 font-quicksand">
+                            Screaming and sprinting away from hilarious nextbots, reviving each other when we get knocked down!
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-pastel-pink bg-black/40 p-2.5 rounded-xl border border-white/5">
+                        <span>Spook Level: 🎃🎃</span>
+                        <span class="text-yellow-300 font-semibold">Funny Chaos 😂</span>
+                    </div>
+                </div>
+
+                <!-- Game 4: Dress To Impress (Spooky Edition) -->
+                <div onclick="toggleGameCard(this, 'Dress To Impress: Spooky Edition 👗🎃')" class="game-card glass-card glass-card-hover rounded-2xl p-5 cursor-pointer relative flex flex-col justify-between border-2 border-transparent border-pastel-pink/40" data-selected="true">
+                    <div>
+                        <div class="relative h-36 rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-pink-950 to-purple-950 flex items-center justify-center border border-white/10">
+                            <div class="text-center p-3">
+                                <span class="text-5xl block mb-1">👗💅</span>
+                                <span class="text-xs text-pastel-pink font-bold tracking-wider uppercase">Spooky Fashion</span>
+                            </div>
+                            <span class="badge-selected absolute top-2 right-2 bg-pastel-hotPink text-white text-xs px-2.5 py-1 rounded-full font-bold shadow-md flex items-center gap-1">
+                                <i data-lucide="check" class="w-3 h-3"></i> Selected
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1 flex items-center justify-between">
+                            Dress To Impress 💅
+                            <span class="text-xs text-pastel-mint font-semibold">Super Cute!</span>
+                        </h3>
+                        <p class="text-pastel-lavender/80 text-xs md:text-sm mb-3 font-quicksand">
+                            Serving spooktacular vampire, witch, & ghost fashion fits on the runway & giving 5 stars!
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-pastel-pink bg-black/40 p-2.5 rounded-xl border border-white/5">
+                        <span>Spook Level: 🎃✨</span>
+                        <span class="text-pastel-pink font-semibold">Glam & Cute 👑</span>
+                    </div>
+                </div>
+
+                <!-- Game 5: Pressure -->
+                <div onclick="toggleGameCard(this, 'Pressure 🌊')" class="game-card glass-card glass-card-hover rounded-2xl p-5 cursor-pointer relative flex flex-col justify-between border-2 border-transparent" data-selected="false">
+                    <div>
+                        <div class="relative h-36 rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-teal-950 to-blue-950 flex items-center justify-center border border-white/10">
+                            <div class="text-center p-3">
+                                <span class="text-5xl block mb-1">🌊🦑</span>
+                                <span class="text-xs text-teal-300 font-bold tracking-wider uppercase">Deep Sea Survival</span>
+                            </div>
+                            <span class="badge-selected absolute top-2 right-2 bg-pastel-hotPink text-white text-xs px-2.5 py-1 rounded-full font-bold shadow-md hidden flex items-center gap-1">
+                                <i data-lucide="check" class="w-3 h-3"></i> Selected
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1 flex items-center justify-between">
+                            Pressure 🌊
+                        </h3>
+                        <p class="text-pastel-lavender/80 text-xs md:text-sm mb-3 font-quicksand">
+                            Deep sea underwater research station horror. Outsmarting aquatic monsters in dark hallways!
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-pastel-pink bg-black/40 p-2.5 rounded-xl border border-white/5">
+                        <span>Spook Level: 🎃🎃🎃🎃</span>
+                        <span class="text-teal-300 font-semibold">Thrilling ⚓</span>
+                    </div>
+                </div>
+
+                <!-- Game 6: 3AM / Horror Stories -->
+                <div onclick="toggleGameCard(this, '3AM Games / Midnight Stories 🌙')" class="game-card glass-card glass-card-hover rounded-2xl p-5 cursor-pointer relative flex flex-col justify-between border-2 border-transparent" data-selected="false">
+                    <div>
+                        <div class="relative h-36 rounded-xl overflow-hidden mb-4 bg-gradient-to-br from-slate-950 to-purple-950 flex items-center justify-center border border-white/10">
+                            <div class="text-center p-3">
+                                <span class="text-5xl block mb-1">🌙🕯️</span>
+                                <span class="text-xs text-indigo-300 font-bold tracking-wider uppercase">Midnight Stories</span>
+                            </div>
+                            <span class="badge-selected absolute top-2 right-2 bg-pastel-hotPink text-white text-xs px-2.5 py-1 rounded-full font-bold shadow-md hidden flex items-center gap-1">
+                                <i data-lucide="check" class="w-3 h-3"></i> Selected
+                            </span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white mb-1 flex items-center justify-between">
+                            3AM Horror Stories 🌙
+                        </h3>
+                        <p class="text-pastel-lavender/80 text-xs md:text-sm mb-3 font-quicksand">
+                            Creepy late night story games filled with jumpscares and giggle attacks together!
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between text-xs text-pastel-pink bg-black/40 p-2.5 rounded-xl border border-white/5">
+                        <span>Spook Level: 🎃🎃🎃</span>
+                        <span class="text-indigo-300 font-semibold">Cozy Chaos 🕯️</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COZY GAME NIGHT ESSENTIALS CHECKLIST -->
+        <section class="glass-card rounded-3xl p-6 md:p-8 mb-12 relative overflow-hidden border border-pastel-pink/30">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="p-3 bg-pastel-pink/20 rounded-2xl text-2xl">☕</div>
+                <div>
+                    <h2 class="text-2xl font-bold text-white font-fredoka">Cozy Date Night Essentials</h2>
+                    <p class="text-pastel-lavender text-xs md:text-sm font-quicksand">Check off our cozy prep items for maximum comfort!</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="checklist">
+                <!-- Item 1 -->
+                <div onclick="toggleChecklistItem(this)" class="checklist-card flex items-center justify-between p-4 rounded-2xl bg-purple-950/40 border border-purple-500/20 cursor-pointer hover:bg-purple-900/40 transition group">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl group-hover:scale-110 transition-transform">🧋</span>
+                        <span class="text-white text-sm font-medium">Boba / Sweet Drink / Hot Chocolate ready</span>
+                    </div>
+                    <div class="checkbox-box w-6 h-6 rounded-lg border-2 border-pastel-pink flex items-center justify-center transition-all bg-purple-950/80">
+                        <i data-lucide="check" class="w-4 h-4 text-pastel-hotPink opacity-0 transition-opacity"></i>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div onclick="toggleChecklistItem(this)" class="checklist-card flex items-center justify-between p-4 rounded-2xl bg-purple-950/40 border border-purple-500/20 cursor-pointer hover:bg-purple-900/40 transition group">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl group-hover:scale-110 transition-transform">🍿</span>
+                        <span class="text-white text-sm font-medium">Favorite snacks & candy stocked up</span>
+                    </div>
+                    <div class="checkbox-box w-6 h-6 rounded-lg border-2 border-pastel-pink flex items-center justify-center transition-all bg-purple-950/80">
+                        <i data-lucide="check" class="w-4 h-4 text-pastel-hotPink opacity-0 transition-opacity"></i>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div onclick="toggleChecklistItem(this)" class="checklist-card flex items-center justify-between p-4 rounded-2xl bg-purple-950/40 border border-purple-500/20 cursor-pointer hover:bg-purple-900/40 transition group">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl group-hover:scale-110 transition-transform">🎧</span>
+                        <span class="text-white text-sm font-medium">Discord voice call active & headset ready</span>
+                    </div>
+                    <div class="checkbox-box w-6 h-6 rounded-lg border-2 border-pastel-pink flex items-center justify-center transition-all bg-purple-950/80">
+                        <i data-lucide="check" class="w-4 h-4 text-pastel-hotPink opacity-0 transition-opacity"></i>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div onclick="toggleChecklistItem(this)" class="checklist-card flex items-center justify-between p-4 rounded-2xl bg-purple-950/40 border border-purple-500/20 cursor-pointer hover:bg-purple-900/40 transition group">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl group-hover:scale-110 transition-transform">🧸</span>
+                        <span class="text-white text-sm font-medium">Plushie & cozy blanket for jump scares</span>
+                    </div>
+                    <div class="checkbox-box w-6 h-6 rounded-lg border-2 border-pastel-pink flex items-center justify-center transition-all bg-purple-950/80">
+                        <i data-lucide="check" class="w-4 h-4 text-pastel-hotPink opacity-0 transition-opacity"></i>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div onclick="toggleChecklistItem(this)" class="checklist-card flex items-center justify-between p-4 rounded-2xl bg-purple-950/40 border border-purple-500/20 cursor-pointer hover:bg-purple-900/40 transition group md:col-span-2">
+                    <div class="flex items-center gap-3">
+                        <span class="text-2xl group-hover:scale-110 transition-transform">💖</span>
+                        <span class="text-white text-sm font-medium">Official permission for me to scream louder than you</span>
+                    </div>
+                    <div class="checkbox-box w-6 h-6 rounded-lg border-2 border-pastel-pink flex items-center justify-center transition-all bg-purple-950/80">
+                        <i data-lucide="check" class="w-4 h-4 text-pastel-hotPink opacity-0 transition-opacity"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DATE SCHEDULER & LIVE COUNTDOWN -->
+        <section class="glass-card rounded-3xl p-6 md:p-8 mb-12 relative">
+            <div class="text-center mb-6">
+                <h2 class="text-2xl md:text-3xl font-bold text-white font-fredoka flex items-center justify-center gap-2">
+                    <span>🗓️</span> Set Our Spooky Date & Time
+                </h2>
+                <p class="text-pastel-lavender text-xs md:text-sm">Pick when our gaming night begins!</p>
+            </div>
+
+            <div class="max-w-md mx-auto mb-8">
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <input type="datetime-local" id="date-input" class="w-full bg-purple-950/80 border-2 border-pastel-pink/40 rounded-2xl px-4 py-3 text-white text-sm font-medium focus:outline-none focus:border-pastel-hotPink transition shadow-inner">
+                    <button onclick="updateCountdownFromInput()" class="bg-pastel-pink hover:bg-pink-400 text-purple-950 font-bold px-6 py-3 rounded-2xl text-sm transition shadow-md whitespace-nowrap">
+                        Update Timer ✨
+                    </button>
+                </div>
+            </div>
+
+            <!-- COUNTDOWN DISPLAY CARDS -->
+            <div class="grid grid-cols-4 gap-2 md:gap-4 max-w-lg mx-auto text-center" id="countdown-timer">
+                <div class="bg-black/40 border border-pastel-pink/30 rounded-2xl p-3 md:p-4 shadow-md">
+                    <span id="cd-days" class="block text-2xl md:text-4xl font-extrabold text-pastel-pink font-fredoka">00</span>
+                    <span class="text-[10px] md:text-xs text-pastel-lavender font-semibold uppercase tracking-wider">Days</span>
+                </div>
+                <div class="bg-black/40 border border-pastel-pink/30 rounded-2xl p-3 md:p-4 shadow-md">
+                    <span id="cd-hours" class="block text-2xl md:text-4xl font-extrabold text-pastel-orange font-fredoka">00</span>
+                    <span class="text-[10px] md:text-xs text-pastel-lavender font-semibold uppercase tracking-wider">Hours</span>
+                </div>
+                <div class="bg-black/40 border border-pastel-pink/30 rounded-2xl p-3 md:p-4 shadow-md">
+                    <span id="cd-mins" class="block text-2xl md:text-4xl font-extrabold text-pastel-mint font-fredoka">00</span>
+                    <span class="text-[10px] md:text-xs text-pastel-lavender font-semibold uppercase tracking-wider">Mins</span>
+                </div>
+                <div class="bg-black/40 border border-pastel-pink/30 rounded-2xl p-3 md:p-4 shadow-md">
+                    <span id="cd-secs" class="block text-2xl md:text-4xl font-extrabold text-pastel-hotPink font-fredoka">00</span>
+                    <span class="text-[10px] md:text-xs text-pastel-lavender font-semibold uppercase tracking-wider">Secs</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASS CUSTOMIZER INPUTS -->
+        <section class="glass-card rounded-3xl p-6 md:p-8 mb-10">
+            <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2 font-fredoka">
+                <span>✏️</span> Personalize Our Date Pass Ticket
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                <div>
+                    <label class="block text-xs text-pastel-lavender mb-1 font-semibold">PLAYER 1 (YOUR NAME)</label>
+                    <input type="text" id="p1-name" value="Player 1 💕" oninput="updateTicketLive()" class="w-full bg-purple-950/80 border border-pastel-lavender/30 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-pastel-pink">
+                </div>
+                <div>
+                    <label class="block text-xs text-pastel-lavender mb-1 font-semibold">PLAYER 2 (HER NICKNAME)</label>
+                    <input type="text" id="p2-name" value="My Gorgeous Pumpkin 🎃" oninput="updateTicketLive()" class="w-full bg-purple-950/80 border border-pastel-lavender/30 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-pastel-pink">
+                </div>
+            </div>
+            <div>
+                <label class="block text-xs text-pastel-lavender mb-1 font-semibold">SWEET NOTE / PROMISE</label>
+                <input type="text" id="custom-note" value="I promise to hold your hand, share my snacks, and save you from every monster! 🧸💗" oninput="updateTicketLive()" class="w-full bg-purple-950/80 border border-pastel-lavender/30 rounded-xl px-4 py-2.5 text-white text-sm focus:outline-none focus:border-pastel-pink">
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center text-pastel-lavender/60 text-xs mt-12 pb-6">
+            Made with infinite love, spooky vibes, and Roblox coins 💖🎃
+        </footer>
+    </div>
+
+    <!-- CELEBRATION MODAL & VIP TICKET PASS -->
+    <div id="celebration-modal" class="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-500">
+        <div class="glass-card max-w-lg w-full rounded-3xl p-6 md:p-8 text-center border-2 border-pastel-pink shadow-2xl transform scale-90 transition-transform duration-500 relative max-h-[90vh] overflow-y-auto" id="modal-box">
+            
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white text-xl p-2 rounded-full hover:bg-white/10 transition">✕</button>
+
+            <div class="text-5xl mb-2 animate-bounce">🎉👻💖</div>
+
+            <h2 class="text-3xl font-extrabold text-white glow-title mb-1 font-fredoka">IT'S A DATE! 🎉</h2>
+            <p class="text-pastel-lavender text-xs md:text-sm mb-6 font-quicksand">
+                YAY! Your Roblox Spooky VIP Co-Op Date Pass is official!
+            </p>
+
+            <!-- TICKET PASS DESIGN -->
+            <div id="ticket-pass" class="bg-gradient-to-br from-purple-950 via-slate-950 to-indigo-950 p-5 rounded-2xl border-2 border-dashed border-pastel-pink/70 text-left relative overflow-hidden mb-6 shadow-2xl">
+                <!-- Watermark -->
+                <div class="absolute -right-6 -bottom-6 text-8xl opacity-10 pointer-events-none">👻</div>
+
+                <!-- Ticket Header -->
+                <div class="flex justify-between items-center mb-4 pb-3 border-b border-white/15">
+                    <div class="flex items-center gap-2">
+                        <span class="text-2xl">🎟️</span>
+                        <div>
+                            <span class="text-[10px] text-pastel-pink font-bold uppercase tracking-widest block">ROBLOX SPOOKY DATE PASS</span>
+                            <span class="text-xs text-white font-extrabold">VIP CO-OP TICKET</span>
+                        </div>
+                    </div>
+                    <span class="bg-pastel-hotPink/20 text-pastel-pink border border-pastel-hotPink/40 text-[10px] px-2.5 py-1 rounded-full font-bold">CONFIRMED 💖</span>
+                </div>
+
+                <!-- Ticket Body -->
+                <div class="space-y-3 text-xs md:text-sm">
+                    <div class="grid grid-cols-2 gap-2 bg-black/30 p-2.5 rounded-xl border border-white/5">
+                        <div>
+                            <span class="text-[10px] text-pastel-lavender block">PLAYER 1</span>
+                            <span id="ticket-p1" class="text-white font-bold">Player 1</span>
+                        </div>
+                        <div>
+                            <span class="text-[10px] text-pastel-lavender block">PLAYER 2</span>
+                            <span id="ticket-p2" class="text-pastel-pink font-bold">Pumpkin 🎃</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <span class="text-[10px] text-pastel-lavender block mb-1">DATE & TIME</span>
+                        <span id="ticket-time-display" class="text-pastel-orange font-bold text-xs bg-purple-900/40 px-3 py-1 rounded-lg inline-block border border-pastel-orange/30">Upcoming Weekend @ 8:00 PM</span>
+                    </div>
+
+                    <div>
+                        <span class="text-[10px] text-pastel-lavender block mb-1">CHOSEN SPOOKY GAME PLAYLIST</span>
+                        <div id="ticket-games-list" class="flex flex-wrap gap-1">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+
+                    <div class="pt-2 border-t border-white/10">
+                        <span class="text-[10px] text-pastel-lavender block mb-0.5">MESSAGE FROM PLAYER 1</span>
+                        <p id="ticket-note-display" class="text-purple-200 italic text-xs font-quicksand bg-black/20 p-2 rounded-lg border border-white/5">
+                            "I promise to save you from all the monsters!"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Decorative Cutouts -->
+                <div class="absolute -left-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-purple-950 rounded-full border-r border-pastel-pink/50"></div>
+                <div class="absolute -right-3 top-1/2 -translate-y-1/2 w-6 h-6 bg-purple-950 rounded-full border-l border-pastel-pink/50"></div>
+            </div>
+
+            <!-- Modal Action Buttons -->
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                <button onclick="copyInviteText()" class="flex-1 bg-gradient-to-r from-pastel-hotPink to-pink-500 hover:from-pink-600 hover:to-pastel-hotPink text-white font-bold py-3 px-4 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-lg cursor-pointer">
+                    <i data-lucide="copy" class="w-4 h-4"></i>
+                    <span>Copy Date Pass Summary</span>
+                </button>
+                <button onclick="closeModal()" class="bg-purple-900/80 hover:bg-purple-800 text-pastel-lavender font-bold py-3 px-5 rounded-xl text-sm transition cursor-pointer">
+                    Close ✨
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC & SYNTHESIZER -->
+    <script>
+        // WEB AUDIO API SOUND SYNTHESIZER
+        let audioCtx = null;
+        let isMuted = false;
+
+        function initAudio() {
+            if (!audioCtx) {
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                audioCtx = new AudioContext();
+            }
+            if (audioCtx.state === 'suspended') {
+                audioCtx.resume();
+            }
+        }
+
+        function toggleAudio() {
+            isMuted = !isMuted;
+            const icon = document.getElementById('audio-icon');
+            const text = document.getElementById('audio-text');
+            if (isMuted) {
+                icon.innerText = '🔇';
+                text.innerText = 'Sound: OFF';
+            } else {
+                icon.innerText = '🔊';
+                text.innerText = 'Sound: ON';
+                playChimeSound();
+            }
+        }
+
+        // Cute sound effect generators
+        function playChimeSound() {
+            if (isMuted) return;
+            initAudio();
+            try {
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(523.25, now); // C5
+                osc.frequency.exponentialRampToValueAtTime(1046.50, now + 0.15); // C6
+
+                gain.gain.setValueAtTime(0.15, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.3);
+            } catch(e) {}
+        }
+
+        function playPopSound() {
+            if (isMuted) return;
+            initAudio();
+            try {
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(300, now);
+                osc.frequency.exponentialRampToValueAtTime(600, now + 0.08);
+
+                gain.gain.setValueAtTime(0.2, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.08);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.08);
+            } catch(e) {}
+        }
+
+        function playVictoryJingle() {
+            if (isMuted) return;
+            initAudio();
+            try {
+                const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6
+                notes.forEach((freq, idx) => {
+                    const osc = audioCtx.createOscillator();
+                    const gain = audioCtx.createGain();
+                    const now = audioCtx.currentTime + idx * 0.1;
+
+                    osc.type = 'sine';
+                    osc.frequency.setValueAtTime(freq, now);
+
+                    gain.gain.setValueAtTime(0.2, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.start(now);
+                    osc.stop(now + 0.25);
+                });
+            } catch(e) {}
+        }
+
+        function playGhostBooSound() {
+            if (isMuted) return;
+            initAudio();
+            try {
+                const now = audioCtx.currentTime;
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(400, now);
+                osc.frequency.exponentialRampToValueAtTime(150, now + 0.4);
+
+                gain.gain.setValueAtTime(0.1, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.4);
+
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+
+                osc.start(now);
+                osc.stop(now + 0.4);
+            } catch(e) {}
+        }
+
+        // STARRY & SPOOKY CANVAS BACKGROUND
+        const canvas = document.getElementById('bg-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Particle {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 3 + 1;
+                this.speedY = -(Math.random() * 0.8 + 0.2);
+                this.speedX = (Math.random() - 0.5) * 0.4;
+                this.alpha = Math.random() * 0.7 + 0.2;
+                this.type = Math.random() > 0.85 ? (Math.random() > 0.5 ? 'heart' : 'star') : 'dot';
+            }
+            update() {
+                this.y += this.speedY;
+                this.x += this.speedX;
+                if (this.y < -10) this.reset();
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = this.alpha;
+                if (this.type === 'heart') {
+                    ctx.fillStyle = '#FFB7C5';
+                    ctx.font = '12px sans-serif';
+                    ctx.fillText('💖', this.x, this.y);
+                } else if (this.type === 'star') {
+                    ctx.fillStyle = '#FF9E00';
+                    ctx.font = '10px sans-serif';
+                    ctx.fillText('✨', this.x, this.y);
+                } else {
+                    ctx.fillStyle = '#E8D5FF';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+                ctx.restore();
+            }
+        }
+
+        function initParticles() {
+            particles = [];
+            const count = Math.floor((canvas.width * canvas.height) / 12000);
+            for (let i = 0; i < count; i++) {
+                particles.push(new Particle());
+            }
+        }
+        initParticles();
+
+        function animateCanvas() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animateCanvas);
+        }
+        animateCanvas();
+
+        // RUNAWAY NO BUTTON LOGIC
+        let noDodgeCount = 0;
+        const noMessages = [
+            "NO 🙈",
+            "Are you sure? 🥺",
+            "Wrong button, silly! 😜",
+            "Too scared? I'll protect you! 🧸",
+            "Think about the cute fits! 👗",
+            "Nice try! 💖",
+            "Button glitched! Try YES! ✨",
+            "YES is the only option! 🥰"
+        ];
+
+        function dodgeNoButton() {
+            playGhostBooSound();
+            noDodgeCount++;
+
+            const noBtn = document.getElementById('no-btn');
+            const yesBtn = document.getElementById('yes-btn');
+            const arena = document.getElementById('button-arena');
+            const status = document.getElementById('playful-status');
+
+            // Cycle text
+            const msgIndex = Math.min(noDodgeCount, noMessages.length - 1);
+            document.getElementById('no-btn-text').innerText = noMessages[msgIndex];
+
+            // Scale up YES button slightly each dodge
+            const currentScale = 1 + Math.min(noDodgeCount * 0.12, 1.2);
+            yesBtn.style.transform = `scale(${currentScale})`;
+
+            // Calculate random relative position inside arena
+            const arenaRect = arena.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+
+            const maxX = (arenaRect.width - btnRect.width) / 2 - 20;
+            const maxY = (arenaRect.height - btnRect.height) / 2 - 10;
+
+            const randomX = (Math.random() - 0.5) * maxX * 1.8;
+            const randomY = (Math.random() - 0.5) * maxY * 1.5;
+
+            noBtn.style.transform = `translate(${randomX}px, ${randomY}px)`;
+
+            // Show playful status
+            status.style.opacity = '1';
+            status.innerText = `Hehe, nice try! The "No" button ran away! (${noDodgeCount} dodges) 👻`;
+        }
+
+        // GAME SELECTION HANDLER
+        const selectedGames = new Set(['DOORS 👁️', 'Evade 🏃', 'Dress To Impress: Spooky Edition 👗🎃']);
+
+        function toggleGameCard(cardElement, gameName) {
+            playPopSound();
+            const isSelected = cardElement.getAttribute('data-selected') === 'true';
+            const badge = cardElement.querySelector('.badge-selected');
+
+            if (isSelected) {
+                cardElement.setAttribute('data-selected', 'false');
+                cardElement.classList.remove('border-pastel-pink/40');
+                if (badge) badge.classList.add('hidden');
+                selectedGames.delete(gameName);
+            } else {
+                cardElement.setAttribute('data-selected', 'true');
+                cardElement.classList.add('border-pastel-pink/40');
+                if (badge) badge.classList.remove('hidden');
+                selectedGames.add(gameName);
+            }
+
+            updateTicketLive();
+        }
+
+        // CHECKLIST HANDLER
+        function toggleChecklistItem(cardElement) {
+            playPopSound();
+            const checkbox = cardElement.querySelector('.checkbox-box');
+            const icon = cardElement.querySelector('[data-lucide="check"]');
+            
+            if (checkbox.classList.contains('bg-pastel-pink')) {
+                checkbox.classList.remove('bg-pastel-pink');
+                checkbox.classList.add('bg-purple-950/80');
+                if (icon) icon.style.opacity = '0';
+            } else {
+                checkbox.classList.add('bg-pastel-pink');
+                checkbox.classList.remove('bg-purple-950/80');
+                if (icon) icon.style.opacity = '1';
+            }
+        }
+
+        // COUNTDOWN TIMER LOGIC
+        // Default target date: Coming Friday at 8:00 PM
+        function getDefaultTargetDate() {
+            const target = new Date();
+            const day = target.getDay();
+            const daysUntilFriday = (5 - day + 7) % 7 || 7;
+            target.setDate(target.getDate() + daysUntilFriday);
+            target.setHours(20, 0, 0, 0);
+            return target;
+        }
+
+        let targetDate = getDefaultTargetDate();
+
+        // Format datetime-local input string
+        function formatDatetimeLocal(d) {
+            const pad = (n) => String(n).padStart(2, '0');
+            return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+        }
+
+        document.getElementById('date-input').value = formatDatetimeLocal(targetDate);
+
+        function updateCountdownFromInput() {
+            playChimeSound();
+            const val = document.getElementById('date-input').value;
+            if (val) {
+                targetDate = new Date(val);
+                showToast('✨ Countdown updated to selected date!');
+                updateTicketLive();
+            }
+        }
+
+        function tickCountdown() {
+            const now = new Date().getTime();
+            const diff = targetDate.getTime() - now;
+
+            if (diff <= 0) {
+                document.getElementById('cd-days').innerText = '00';
+                document.getElementById('cd-hours').innerText = '00';
+                document.getElementById('cd-mins').innerText = '00';
+                document.getElementById('cd-secs').innerText = '00';
+                return;
+            }
+
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('cd-days').innerText = String(days).padStart(2, '0');
+            document.getElementById('cd-hours').innerText = String(hours).padStart(2, '0');
+            document.getElementById('cd-mins').innerText = String(mins).padStart(2, '0');
+            document.getElementById('cd-secs').innerText = String(secs).padStart(2, '0');
+        }
+
+        setInterval(tickCountdown, 1000);
+        tickCountdown();
+
+        // LIVE TICKET PASS UPDATER
+        function updateTicketLive() {
+            const p1 = document.getElementById('p1-name').value || 'Player 1';
+            const p2 = document.getElementById('p2-name').value || 'Pumpkin 🎃';
+            const note = document.getElementById('custom-note').value || 'I promise to save you from monsters!';
+
+            document.getElementById('ticket-p1').innerText = p1;
+            document.getElementById('ticket-p2').innerText = p2;
+            document.getElementById('ticket-note-display').innerText = `"${note}"`;
+
+            // Format date for ticket
+            const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            document.getElementById('ticket-time-display').innerText = targetDate.toLocaleDateString(undefined, options);
+
+            // Update chosen games list tags
+            const gamesContainer = document.getElementById('ticket-games-list');
+            gamesContainer.innerHTML = '';
+            if (selectedGames.size === 0) {
+                gamesContainer.innerHTML = '<span class="text-xs text-gray-400">No games selected yet!</span>';
+            } else {
+                selectedGames.forEach(game => {
+                    const tag = document.createElement('span');
+                    tag.className = 'bg-pastel-pink/20 text-pastel-pink border border-pastel-pink/30 text-[10px] px-2 py-0.5 rounded-md font-semibold';
+                    tag.innerText = game;
+                    gamesContainer.appendChild(tag);
+                });
+            }
+        }
+        updateTicketLive();
+
+        // HANDLE YES CLICK & CELEBRATION
+        function handleYesClick() {
+            playVictoryJingle();
+            
+            // Fire Confetti Cannon
+            try {
+                confetti({
+                    particleCount: 120,
+                    spread: 80,
+                    origin: { y: 0.6 },
+                    colors: ['#FFB7C5', '#FF4081', '#FF9E00', '#E8D5FF', '#72F2C5']
+                });
+            } catch(e) {}
+
+            updateTicketLive();
+
+            // Show Celebration Modal
+            const modal = document.getElementById('celebration-modal');
+            const modalBox = document.getElementById('modal-box');
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modalBox.classList.remove('scale-90');
+            modalBox.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            playPopSound();
+            const modal = document.getElementById('celebration-modal');
+            const modalBox = document.getElementById('modal-box');
+
+            modalBox.classList.remove('scale-100');
+            modalBox.classList.add('scale-90');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        // COPY INVITE SUMMARY TO CLIPBOARD
+        function copyInviteText() {
+            const p1 = document.getElementById('p1-name').value || 'Player 1';
+            const p2 = document.getElementById('p2-name').value || 'Pumpkin 🎃';
+            const options = { weekday: 'short', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+            const timeStr = targetDate.toLocaleDateString(undefined, options);
+            const gamesStr = Array.from(selectedGames).map(g => `  • ${g}`).join('\n') || '  • Mystery Spooky Game!';
+            const note = document.getElementById('custom-note').value;
+
+            const summaryText = 
+`✨🎃 SPOOKY ROBLOX DATE NIGHT PASS 🎃✨
+━━━━━━━━━━━━━━━━━━━━━━━
+👑 Player 1: ${p1}
+💖 Player 2: ${p2}
+🗓️ Date & Time: ${timeStr}
+
+🎮 SPOOKY GAME PLAYLIST:
+${gamesStr}
+
+☕ COZY ESSENTIALS:
+  • 🧋 Boba / Hot Cocoa
+  • 🎧 Discord Voice Call
+  • 🧸 Jump Scare Protection Blanket
+
+💌 SPECIAL NOTE:
+"${note}"
+
+Status: OFFICIALLY CONFIRMED 💖 (Can't wait!)`;
+
+            // Copy with fallback for iframe compatibility
+            const textArea = document.createElement("textarea");
+            textArea.value = summaryText;
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast('💖 Date pass summary copied to clipboard!');
+            } catch (err) {
+                showToast('Unable to copy automatically');
+            }
+            document.body.removeChild(textArea);
+        }
+
+        // TOAST NOTIFICATION HELPER
+        function showToast(message, icon = '✨') {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            document.getElementById('toast-icon').innerText = icon;
+
+            toast.classList.remove('translate-x-full');
+            setTimeout(() => {
+                toast.classList.add('translate-x-full');
+            }, 3000);
+        }
+
+        // Re-initialize Lucide icons on dynamic changes
+        lucide.createIcons();
+    </script>
+</body>
+</html>
